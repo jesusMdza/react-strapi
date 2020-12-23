@@ -3,7 +3,9 @@ import styles from "./Header.module.scss";
 
 const Header = () => {
   return (
-    <div className={`container d-flex ${styles.header}`}>
+    <div
+      className={`container d-flex justify-content-between ${styles.header}`}
+    >
       <span>MI</span>
       <ul className="d-flex justify-content-between">
         <li>Random</li>
