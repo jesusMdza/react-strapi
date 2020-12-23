@@ -19,6 +19,9 @@
     },
     "description": {
       "type": "text"
+    },
+    "theme": {
+      "type": "string"
     }
   }
 }
