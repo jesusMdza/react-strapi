@@ -1,0 +1,23 @@
+{
+  "kind": "collectionType",
+  "collectionName": "case_studies",
+  "info": {
+    "name": "CaseStudy"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "subheading": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    }
+  }
+}
