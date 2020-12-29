@@ -16,8 +16,6 @@ function App() {
     quoteContext.get().then((data) => setQuotes(data));
   }, []);
 
-  console.log(caseStudies);
-
   return (
     <div className="App">
       <Router>
