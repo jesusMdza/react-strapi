@@ -1,46 +1,38 @@
 import "./App.scss";
-import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Header from "./components/Header/Header";
 import CaseStudy from "./components/CaseStudy/CaseStudy";
+import caseStudyContext from "./shared/context/caseStudy";
+import quoteContext from "./shared/context/quote";
 
 function App() {
   const [caseStudies, setCaseStudies] = useState([]);
   const [quotes, setQuotes] = useState([]);
 
   useEffect(() => {
-    getCaseStudies().then((data) => setCaseStudies(data));
-    getQuotes().then((data) => setQuotes(data));
+    // localStorage.setItem("token", JSON.stringify(jwt));
+    caseStudyContext.get().then((data) => setCaseStudies(data));
+    quoteContext.get().then((data) => setQuotes(data));
   }, []);
 
-  const getCaseStudies = () => {
-    return fetch("http://localhost:1337/case-studies")
-      .then((response) => response.json())
-      .then((data) => {
-        if (data) return data;
-      });
-  };
-
-  const getQuotes = () => {
-    return fetch("http://localhost:1337/quotes")
-      .then((response) => response.json())
-      .then((data) => {
-        if (data) return data;
-      });
-  };
+  console.log(caseStudies);
 
   return (
     <div className="App">
-      <Header />
-      {caseStudies.map(({ title, label, description, theme }, i) => (
-        <CaseStudy
-          key={i}
-          title={title}
-          label={label}
-          description={description}
-          theme={theme}
-        />
-      ))}
+      <Router>
+        <Header />
+        {caseStudies.map(({ id, title, label, description, theme }) => (
+          <CaseStudy
+            key={id}
+            id={id}
+            title={title}
+            label={label}
+            description={description}
+            theme={theme}
+          />
+        ))}
+      </Router>
     </div>
   );
 }

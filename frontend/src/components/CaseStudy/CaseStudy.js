@@ -1,11 +1,21 @@
 import React, { useState, useEffect } from "react";
 import styles from "./CaseStudy.module.scss";
+import caseStudyContext from "../../shared/context/caseStudy";
 
-const CaseStudy = ({ title, label, description, theme }) => {
+const CaseStudy = (props) => {
+  const { id, title, label, description, theme } = props;
+
   const [isEditing, setIsEditing] = useState(false);
   const [caseTitle, setCaseTitle] = useState(title);
   const [caseLabel, setCaseLabel] = useState(label);
   const [caseDescription, setCaseDescription] = useState(description);
+
+  const body = {
+    title: caseTitle,
+    label: caseLabel,
+    caseDescription: caseDescription,
+    theme: theme,
+  };
 
   const handleInputChange = (e) => {
     setCaseTitle(e.target.value);
@@ -50,7 +60,7 @@ const CaseStudy = ({ title, label, description, theme }) => {
                 </button>
                 <button
                   className={`${styles.saveButton} mr-1`}
-                  onClick={editCaseStudy}
+                  onClick={() => caseStudyContext.update(id)}
                 >
                   Save
                 </button>
@@ -61,15 +71,15 @@ const CaseStudy = ({ title, label, description, theme }) => {
                   <input
                     onChange={(e) => handleInputChange(e)}
                     className="mb-1"
-                    value={caseTitle}
+                    defaultValue={caseTitle}
                   />
                 </h1>
                 <label>
-                  <input value={label} />
+                  <input defaultValue={label} />
                 </label>
               </div>
               <p>
-                <textarea className="w-100" value={description} />
+                <textarea className="w-100" defaultValue={description} />
               </p>
             </>
           )}
